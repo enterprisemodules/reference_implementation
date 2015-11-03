@@ -49,7 +49,6 @@ class profile::wls::wlsonly::domain(
       '-Xms768m',
       '-Xmx768m',
     ],
-    ],
     require          => Wls_adminserver['wlsonly/AdminServer'],
     before           => Wls_cluster['wlsonly/WlsOnlyCluster'],
   }
