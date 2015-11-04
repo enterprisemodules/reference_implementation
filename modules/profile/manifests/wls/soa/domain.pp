@@ -155,7 +155,7 @@ class profile::wls::soa::domain(
     weblogic_password => $weblogic_password,
     connect_url       => "t3://${adminserver_address}:${adminserver_port}",
     weblogic_home_dir => $weblogic_home_dir,
-    post_classpath    => "${middleware_home_dir}/oracle_common/modules/internal/features/jrf_wlsFmw_oracle.jrf.wlst_12.1.3.jar",
+    post_classpath    => "${middleware_home_dir}/oracle_common/modules/oracle.jps_12.1.3/jps-wls-trustprovider.jar:${middleware_home_dir}/oracle_common/modules/internal/features/jrf_wlsFmw_oracle.jrf.wlst_12.1.3.jar",
   } ->
 
   #
