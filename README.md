@@ -77,7 +77,7 @@ This repository **doesn't** contain the Oracle or Puppetlabs software needed to 
 - `p13390677_112040_Linux-x86-64_3of7.zip`
 - `puppet-enterprise-2015.2.2-el-6-x86_64.tar.gz`
 
-##Philisophy
+## Philosophy
 
 To structure this setup we have used the following guidelines:
 
