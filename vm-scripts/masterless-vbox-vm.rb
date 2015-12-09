@@ -2,7 +2,7 @@ machine.vm.provider :virtualbox do |vb, override|
 
   alias_name      = alias_name.split('-').last
   hostname        = "#{alias_name}.#{settings[:virtualbox][:domain_name]}"
-  override.vm.box = "puppetlabs/centos-6.6-64-puppet"
+  override.vm.box = "enterprisemodules/centos-6.6-64-puppet"
 
   vb.customize ["modifyvm", :id, "--memory", settings[:memory]]
   vb.customize ["modifyvm", :id, "--name", alias_name]

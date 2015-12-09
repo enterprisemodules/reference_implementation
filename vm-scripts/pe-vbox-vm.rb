@@ -2,7 +2,7 @@ machine.vm.provider :virtualbox do |vb, override|
 
   alias_name      = alias_name.split('-').last
   hostname = "#{alias_name}.#{settings[:virtualbox][:domain_name]}"
-  override.vm.box = "puppetlabs/centos-6.6-64-nocm"
+  override.vm.box = "enterprisemodules/centos-6.6-x86_64-nocm"
 
   puppet_installer = "puppet-enterprise-2015.2.2-el-6-x86_64/puppet-enterprise-installer"
 
@@ -21,7 +21,7 @@ machine.vm.provider :virtualbox do |vb, override|
   override.vm.provision :shell, :inline => <<-EOD
 cat > /etc/hosts<< "EOF"
 127.0.0.1 localhost.localdomain localhost4 localhost4.localdomain4
-10.10.10.10 master.example.com
+10.10.10.10 master.example.com puppet master
 #{settings[:virtualbox][:priv_ipaddress]} #{hostname} #{alias_name}
 EOF
 EOD
