@@ -23,7 +23,7 @@
 class profile::wls::wlsonly::domain(
   String  $domain_name,
   String  $nodemanager_address,
-  Integer  $nodemanager_port,
+  Integer $nodemanager_port,
   String  $adminserver_address,
   Integer $adminserver_port,
   String  $domains_dir,
@@ -35,6 +35,7 @@ class profile::wls::wlsonly::domain(
   Integer $version,
   Array   $admin_server_arguments,
   Hash    $servers,
+  String  $cluster_name,
 )
 {
 
@@ -49,13 +50,13 @@ class profile::wls::wlsonly::domain(
       '-Xms768m',
       '-Xmx768m',
     ],
-    require          => Wls_adminserver['wlsonly/AdminServer'],
-    before           => Wls_cluster['wlsonly/WlsOnlyCluster'],
+    require          => Wls_adminserver["${domain_name}/AdminServer"],
+    before           => Wls_cluster["${domain_name}/${cluster_name}"],
   }
 
   #
   # This statement creates all machines and WebLogic servers. The content of
-  # the $servers variable are read through hiera. Here you ca decide if your configuration
+  # the $servers variable are read through hiera. Here you can decide if your configuration
   # is a single node system or a multi-node cluster. The nodes and machines them selfs are 
   # created after the domain is created.
   #
@@ -65,7 +66,7 @@ class profile::wls::wlsonly::domain(
   # Here you create your domain. The domain is the first thing a WebLogic installation needs. Here
   # you also decide what kind of domain you need. A bare WebLogic 
   #
-  wls_install::domain{'wlsonly':
+  wls_install::domain{$domain_name:
     domain_name                          => $domain_name,
     version                              => $version,
     wls_domains_dir                      => $domains_dir,
@@ -116,7 +117,7 @@ class profile::wls::wlsonly::domain(
   # wls_setting is used to store the credentials and connect URL of a domain. The Puppet
   # types need this to connect to the admin server and change settings.
   #
-  wls_setting{'wlsonly':
+  wls_setting{$domain_name:
     user              => $os_user,
     weblogic_user     => $weblogic_user,
     weblogic_password => $weblogic_password,
@@ -129,7 +130,7 @@ class profile::wls::wlsonly::domain(
   # Admin server. because the AdminServer is restarted by wls_adminserver{'soa/AdminServer':}
   # These settings are immediately applied
   #
-  wls_server{"wlsonly/AdminServer":
+  wls_server{"${domain_name}/AdminServer":
     ensure                        => 'present',
     arguments                     => $admin_server_arguments,
     listenaddress                 => $adminserver_addres,
@@ -148,7 +149,7 @@ class profile::wls::wlsonly::domain(
   # This definition restarts the Admin server. It is a refresh-only, so it is only done 
   # when the statement before actually changed something.  
   #
-  wls_adminserver{'wlsonly/AdminServer':
+  wls_adminserver{"${domain_name}/AdminServer":
     ensure              => running,
     refreshonly         => true,
     server_name         => 'AdminServer',
@@ -160,14 +161,14 @@ class profile::wls::wlsonly::domain(
     weblogic_user       => $weblogic_user,
     weblogic_password   => $weblogic_password,
     weblogic_home_dir   => $weblogic_home_dir,
-    subscribe           => Wls_install::Domain['wlsonly'],
+    subscribe           => Wls_install::Domain[$domain_name],
   } ->
 
   #
   # This is the cluster definition. The server array is extracted from the list of servers 
   # and machines,
   #
-  wls_cluster{'wlsonly/WlsOnlyCluster':
+  wls_cluster{"${domain_name}/${cluster_name}":
     ensure         => 'present',
     messagingmode  => 'unicast',
     migrationbasis => 'consensus',
