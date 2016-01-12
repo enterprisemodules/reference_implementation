@@ -8,7 +8,7 @@ alias_name = Pathname.new(__FILE__).basename('.rb').to_s
 #
 ####################
 settings = {}
-settings[:memory] = 2048
+settings[:memory] = 3072
 settings[:num_cpus] = 1
 settings[:virtualbox] = {}
 settings[:virtualbox][:priv_ipaddress] = '10.10.10.20'
