@@ -19,3 +19,5 @@ modules/wls_install/
 modules/yamlfile/
 modules/timezone
 domain_soa.jar
+.bundle
+wls-acceptance.box

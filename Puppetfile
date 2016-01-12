@@ -1,7 +1,7 @@
 forge "http://forge.enterprisemodules.com"
 
 mod 'enterprisemodules-wls_install'               ,'2.0.x'
-mod 'enterprisemodules-wls_config'                ,'2.0.x'
+mod 'enterprisemodules-wls_config'                ,'2.1.x'
 mod 'enterprisemodules-ora_install'               ,'2.0.x'
 mod 'enterprisemodules-ora_config'                ,'2.0.x'
 mod 'puppetlabs-stdlib'
