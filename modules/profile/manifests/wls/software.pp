@@ -2,12 +2,13 @@ class profile::wls::software(
   String  $middleware_home_dir,
   String  $oracle_base_home_dir,
   String  $filename,
+  Integer $version,
   Boolean $fmw_infra,
 )
 {
 
   class{'wls_install::software':
-    version              => 1213,
+    version              => $version,
     filename             => $filename,
     fmw_infra            => $fmw_infra,
     middleware_home_dir  => $middleware_home_dir,

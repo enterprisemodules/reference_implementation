@@ -54,13 +54,13 @@ class profile::wls::soa::domain(
   # conversion of the domain. Change them the way you need them.
   #
   $bpm_enabled = false # true|false
-  $bam_enabled = true  # true|false
+  $bam_enabled = false  # true|false
   $osb_enabled = false # true|false
   $soa_enabled = true  # true|false
   $oam_enabled = false # true|false
   $oim_enabled = false # true|false
   $b2b_enabled = false # true|false
-  $ess_enabled = true  # true|false
+  $ess_enabled = false # true|false
 
   #
   # Some general usage variables
@@ -111,7 +111,7 @@ class profile::wls::soa::domain(
     repository_prefix                    => $repository_prefix,
     repository_password                  => 'welcome01',
     repository_sys_password              => $repository_sys_password,
-    log_output                           => true,  # When debugging, set this to true
+    log_output                           => false,  # When debugging, set this to true
   } ->
 
   #

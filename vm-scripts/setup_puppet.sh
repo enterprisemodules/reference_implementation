@@ -6,7 +6,7 @@ echo 'Installing required gems'
 
 echo 'Installing required puppet modules'
 cd /vagrant
-/opt/puppetlabs/puppet/bin/librarian-puppet install
+# /opt/puppetlabs/puppet/bin/librarian-puppet install
 
 #
 # Setup hiera search and backend. We need this to config our systems
