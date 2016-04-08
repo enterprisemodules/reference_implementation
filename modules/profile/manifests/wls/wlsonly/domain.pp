@@ -46,7 +46,6 @@ class profile::wls::wlsonly::domain(
     nodemanager_port => $nodemanager_port,
     server_arguments => [
       '-XX:PermSize=64m',
-      '-XX:MaxPermSize=512m',
       '-Xms768m',
       '-Xmx768m',
     ],

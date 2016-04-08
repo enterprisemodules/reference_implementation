@@ -21,3 +21,5 @@ modules/timezone
 domain_soa.jar
 .bundle
 wls-acceptance.box
+.DS_Store
+.byebug_history

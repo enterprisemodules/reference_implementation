@@ -5,15 +5,18 @@ class profile::java {
     ensure  => absent,
   } ->
 
-  jdk7::install7{ 'jdk1.7.0_79':
-      version                   => "7u79" ,
-      fullVersion               => "jdk1.7.0_79",
-      alternativesPriority      => 18000,
-      x64                       => true,
-      downloadDir               => "/var/tmp/install",
-      urandomJavaFix            => true,
-      rsakeySizeFix             => true,
-      cryptographyExtensionFile => "UnlimitedJCEPolicyJDK7.zip",
-      sourcePath                => "/vagrant/software",
+  jdk7::install7{ 'jdk-8u74-linux-x64':
+    version                     => "8u74" ,
+    full_version                => "jdk1.8.0_74",
+    alternatives_priority       => 18001,
+    x64                         => true,
+    download_dir                => "/var/tmp/install",
+    urandom_java_fix            => true,
+    rsa_key_size_fix            => true,
+    cryptography_extension_file => "jce_policy-8.zip",
+    source_path                 => "/vagrant/software"
   }
 }
+
+
+
