@@ -2,7 +2,7 @@ machine.vm.provider :virtualbox do |vb, override|
 
   alias_name      = alias_name.split('-').last
   hostname = "#{alias_name}.#{settings[:virtualbox][:domain_name]}"
-  override.vm.box = "puppetlabs/centos-7.2-64-nocm"
+  override.vm.box = "enterprisemodules/centos-7.2-x86_64-nocm"
 
   puppet_installer = "puppet-enterprise-2016.1.2-el-7-x86_64/puppet-enterprise-installer"
 
