@@ -1,9 +1,9 @@
 forge "http://forge.enterprisemodules.com"
 
-mod 'enterprisemodules-wls_install'               ,'>= 2.0.1'
-mod 'enterprisemodules-wls_config'                ,'2.1.x'
+mod 'enterprisemodules-wls_install'               ,'2.1.x'
+mod 'enterprisemodules-wls_config'                ,'3.0.x'
 mod 'enterprisemodules-ora_install'               ,'2.0.x'
-mod 'enterprisemodules-ora_config'                ,'2.0.x'
+mod 'enterprisemodules-ora_config'                ,'2.1.x'
 mod 'puppetlabs-stdlib'
 mod 'petems-swap_file'                            ,'1.0.x'
 mod 'fiddyspence-sysctl'                          ,'0.0.5'

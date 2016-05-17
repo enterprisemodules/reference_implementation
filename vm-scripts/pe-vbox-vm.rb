@@ -2,9 +2,9 @@ machine.vm.provider :virtualbox do |vb, override|
 
   alias_name      = alias_name.split('-').last
   hostname = "#{alias_name}.#{settings[:virtualbox][:domain_name]}"
-  override.vm.box = "enterprisemodules/centos-6.6-x86_64-nocm"
+  override.vm.box = "puppetlabs/centos-7.2-64-nocm"
 
-  puppet_installer = "puppet-enterprise-2015.2.2-el-6-x86_64/puppet-enterprise-installer"
+  puppet_installer = "puppet-enterprise-2016.1.2-el-7-x86_64/puppet-enterprise-installer"
 
   vb.customize ["modifyvm", :id, "--memory", settings[:memory]]
   vb.customize ["modifyvm", :id, "--name", alias_name]
@@ -39,5 +39,5 @@ EOD
   #
   # After the interactive run is done, we restart the agent in a normal way.
   #
-  override.vm.provision :shell, :inline => "/etc/init.d/puppet start"
+  override.vm.provision :shell, :inline => "systemctl start puppet"
 end

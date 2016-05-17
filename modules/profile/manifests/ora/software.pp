@@ -20,7 +20,7 @@ class profile::ora::software(
 
   ora_install::net{ 'config net8':
     oracle_home  => $oracle_home,
-    version      => '11.2',        # Different version then the oracle version
+    version      => '12.1',        # Different version then the oracle version
     download_dir => '/tmp',
   } ->
 

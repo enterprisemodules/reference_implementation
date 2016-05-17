@@ -18,7 +18,9 @@ settings[:virtualbox][:domain_name] = 'example.com'
 # Choose your version of Puppet Enterprise
 #
 # puppet_installer   = "puppet-enterprise-2015.3.0-el-6-x86_64/puppet-enterprise-installer"
-puppet_installer   = "puppet-enterprise-2015.2.2-el-6-x86_64/puppet-enterprise-installer"
+# puppet_installer   = "puppet-enterprise-2015.2.2-el-6-x86_64/puppet-enterprise-installer"
+puppet_installer   = "puppet-enterprise-2016.1.2-el-7-x86_64/puppet-enterprise-installer"
+
 pe_puppet_user_id  = 495
 pe_puppet_group_id = 496
 
@@ -33,7 +35,7 @@ config.vm.define alias_name do |machine|
   machine.vm.provider :virtualbox do |vb, override|
 
     hostname = "#{alias_name.split('-').last}.#{settings[:virtualbox][:domain_name]}"
-    override.vm.box = "puppetlabs/centos-6.6-64-nocm"
+    override.vm.box = "puppetlabs/centos-7.2-64-nocm"
 
 
     vb.customize ["modifyvm", :id, "--memory", settings[:memory]]
@@ -56,7 +58,8 @@ config.vm.define alias_name do |machine|
     # For now we stop the firewall. In the future we will add a nice puppet setup to the ports needed
     # for Puppet Enterprise to work correctly.
     #
-    override.vm.provision :shell, :inline => "service iptables stop"
+    override.vm.provision :shell, :inline => "systemctl stop firewalld.service"
+    override.vm.provision :shell, :inline => "systemctl disable firewalld.service"
     #
     # This script make's sure the vagrant paths's are symlinked to the paces Puppet Enterprise looks for specific
     # modules, manifests and hiera data. This makes it easy to change these files on your host operating system.

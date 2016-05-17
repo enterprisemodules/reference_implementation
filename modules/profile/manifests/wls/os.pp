@@ -10,10 +10,16 @@ class profile::wls::os {
     swapfilesize => '8192000000'
   }
 
-  service { iptables:
-        enable    => false,
-        ensure    => false,
-        hasstatus => true,
+  case ($::os['release']['major']) {
+    '4','5','6': { $firewall_service = 'iptables'}
+    '7': { $firewall_service = 'firewalld' }
+    default: { fail 'unsupported OS version when checking firewall service'}
+  }
+
+  service { $firewall_service:
+      enable    => false,
+      ensure    => false,
+      hasstatus => true,
   }
 
   group { 'weblogic' :
