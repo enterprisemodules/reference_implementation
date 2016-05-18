@@ -26,6 +26,21 @@ config.vm.define alias_name do |machine|
   #
   # If you need any other stuff for the VM. This is the place
   #
+
+  #
+  # This is to bypass a VirtualBox error causing errors when installing Oracle.
+  # Check https://www.virtualbox.org/ticket/14427
+  #
+  config.vm.provider :virtualbox do |vb|
+    vb.customize ["setextradata", :id, "VBoxInternal/CPUM/HostCPUID/Cache/Leaf"        , "0x4"]
+    vb.customize ["setextradata", :id, "VBoxInternal/CPUM/HostCPUID/Cache/SubLeaf"     , "0x4"]
+    vb.customize ["setextradata", :id, "VBoxInternal/CPUM/HostCPUID/Cache/eax"         , "0"]
+    vb.customize ["setextradata", :id, "VBoxInternal/CPUM/HostCPUID/Cache/ebx"         , "0"]
+    vb.customize ["setextradata", :id, "VBoxInternal/CPUM/HostCPUID/Cache/ecx"         , "0"]
+    vb.customize ["setextradata", :id, "VBoxInternal/CPUM/HostCPUID/Cache/edx"         , "0"]
+    vb.customize ["setextradata", :id, "VBoxInternal/CPUM/HostCPUID/Cache/SubLeafMask" , "0xffffffff"]
+  end  
+
   include_file 'masterless-vbox-vm', binding
 
 end
