@@ -14,20 +14,6 @@ class profile::ora::software(
     oracle_home               => $oracle_home,
     puppet_download_mnt_point => '/vagrant/software',
     remote_file               => false,
-  }->
-
-  file{'/tmp': ensure => 'directory'} ->
-
-  ora_install::net{ 'config net8':
-    oracle_home  => $oracle_home,
-    version      => '12.1',        # Different version then the oracle version
-    download_dir => '/tmp',
-  } ->
-
-  ora_install::listener{'start listener':
-    oracle_base  => $oracle_base,
-    oracle_home  => $oracle_home,
-    action       => 'start',
   }
 
 }

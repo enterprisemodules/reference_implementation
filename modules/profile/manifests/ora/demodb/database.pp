@@ -73,6 +73,20 @@ class profile::ora::demodb::database(
     db_name     => $dbname,
   } ->
 
+  file{'/tmp': ensure => 'directory'} ->
+
+  ora_install::net{ 'config net8':
+    oracle_home  => $oracle_home,
+    version      => '12.1',        # Different version then the oracle version
+    download_dir => '/tmp',
+  } ->
+
+  ora_install::listener{'start listener':
+    oracle_base  => $oracle_base,
+    oracle_home  => $oracle_home,
+    action       => 'start',
+  }
+
   ora_service{"demo.example.com@${dbname}":
     ensure => present,
   } ->
