@@ -1,5 +1,6 @@
 forge "http://forge.enterprisemodules.com"
 
+mod 'hajee/connect'
 mod 'enterprisemodules-wls_install'               ,'2.1.x'
 mod 'enterprisemodules-wls_config'                ,'3.0.x'
 mod 'enterprisemodules-ora_install'               ,'2.0.x'
