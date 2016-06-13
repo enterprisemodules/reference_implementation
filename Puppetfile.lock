@@ -4,6 +4,8 @@ FORGE
     adrien-filemapper (1.1.3)
     biemond-jdk7 (0.5.3)
     enterprisemodules-easy_type (2.0.1)
+    enterprisemodules-em_utils (1.0.0)
+      puppetlabs-stdlib (>= 0)
     enterprisemodules-ora_config (2.1.0)
       enterprisemodules-easy_type (< 2.1.0, >= 2.0.0)
     enterprisemodules-ora_install (2.0.3)
@@ -32,6 +34,7 @@ FORGE
 DEPENDENCIES
   adrien-filemapper (~> 1.1.0)
   biemond-jdk7 (~> 0.5.0)
+  enterprisemodules-em_utils (~> 1.0.0)
   enterprisemodules-ora_config (~> 2.1.0)
   enterprisemodules-ora_install (~> 2.0.0)
   enterprisemodules-wls_config (~> 3.0.0)
