@@ -25,6 +25,7 @@ class profile::ora::patches(
       ensure     => 'present',
       os_user    => 'oracle',
       ocmrf_file => "${oracle_home}/OPatch/ocm.rsp",
+      schedule   => 'maintenance-window',     # Only apply patches in maintenance window
       before     => Db_control["start_${dbname}_after_patching"],
       require    => [
           Ora_install::Opatchupgrade['opatch_upgrade'],
@@ -41,6 +42,7 @@ class profile::ora::patches(
       instance_name           => $dbname,
       oracle_product_home_dir => $oracle_home,
       os_user                 => 'oracle',
+      schedule                => 'maintenance-window',    # Only stop database during maintenance window
       notify                  => Db_control["start_${dbname}_after_patching"],
     }
 
