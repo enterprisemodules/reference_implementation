@@ -7,5 +7,5 @@ hiera_include('role')
 # might go down during these times. 
 #
 schedule { 'maintenance-window':
-  range  => "2:00 - 4:00"  # Change to your requirements
+  range  => "00:00 - 23:59"  # Change to your requirements
 }
