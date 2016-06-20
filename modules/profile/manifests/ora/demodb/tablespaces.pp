@@ -1,8 +1,10 @@
 class profile::ora::demodb::tablespaces(
   String $tablespace_name,
-  String $dbname,
-){
-  ora_tablespace {"${tablespace_name}@${dbname}":
+)
+{
+  include profile::ora
+
+  ora_tablespace {"${tablespace_name}@${profile::ora::dbname}":
     ensure                   => present,
     datafile                 => $tablespace_name,
     size                     => '20M',
@@ -13,6 +15,5 @@ class profile::ora::demodb::tablespaces(
     extent_management        => local,
     segment_space_management => auto,
   }
-
 
 }

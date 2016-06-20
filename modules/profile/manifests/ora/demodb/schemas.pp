@@ -1,8 +1,7 @@
 class profile::ora::demodb::schemas(
   String  $schema_name,
-  String  $dbname,
 ){
-  ora_user{"${schema_name}@${dbname}":
+  ora_user{"${schema_name}@${profile::ora::dbname}":
     ensure      => present,
     password    => $schema_name,
     quotas      => {

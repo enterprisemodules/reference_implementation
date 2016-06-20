@@ -1,17 +1,16 @@
-class profile::ora::demodb::database(
-  String  $dbname,
-  String  $oracle_home,
-  String  $oracle_base,
-  String  $system_password,
-  String  $sys_password,
-){
-  ora_database{$dbname:
+class profile::ora::demodb::database()
+{
+  require profile::ora
+  #
+  # All standard values fetched in data function
+  #
+  ora_database{$profile::ora::dbname:
     ensure                  => present,
-    oracle_base             => $oracle_base,
-    oracle_home             => $oracle_home,
+    oracle_base             => $profile::ora::base,
+    oracle_home             => $profile::ora::home,
     control_file            => 'reuse',
-    system_password         => $system_password,
-    sys_password            => $sys_password,
+    system_password         => $profile::ora::system_password,
+    sys_password            => $profile::ora::sys_password,
     character_set           => 'AL32UTF8',
     national_character_set  => 'AL16UTF16',
     extent_management       => 'local',
@@ -63,34 +62,34 @@ class profile::ora::demodb::database(
     ],
   } ->
 
-  ora_install::dbactions{ "start_${dbname}":
-    oracle_home => $oracle_home,
-    db_name     => $dbname,
+  ora_install::dbactions{ "start_${profile::ora::dbname}":
+    oracle_home => $profile::ora::home,
+    db_name     => $profile::ora::dbname,
   } ->
 
   ora_install::autostartdatabase{ 'autostart oracle':
-    oracle_home => $oracle_home,
-    db_name     => $dbname,
+    oracle_home => $profile::ora::home,
+    db_name     => $profile::ora::dbname,
   } ->
 
   file{'/tmp': ensure => 'directory'} ->
 
   ora_install::net{ 'config net8':
-    oracle_home  => $oracle_home,
+    oracle_home  => $profile::ora::home,
     version      => '12.1',        # Different version then the oracle version
     download_dir => '/tmp',
   } ->
 
   ora_install::listener{'start listener':
-    oracle_base  => $oracle_base,
-    oracle_home  => $oracle_home,
+    oracle_base  => $profile::ora::base,
+    oracle_home  => $profile::ora::home,
     action       => 'start',
   }
 
-  ora_service{"demo.example.com@${dbname}":
+  ora_service{"demo.example.com@${profile::ora::dbname}":
     ensure => present,
   } ->
-  ora_service{"demo@${dbname}":
+  ora_service{"demo@${profile::ora::dbname}":
     ensure => present,
   }
 

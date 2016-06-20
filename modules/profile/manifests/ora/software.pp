@@ -1,18 +1,19 @@
 class profile::ora::software(
-  String  $version,
-  String  $file_name,
-  String  $type,
-  String  $oracle_home,
-  String  $oracle_base,
+  $version,
+  $file_name,
+  $type,
 )
 {
+  include profile
+  include profile::ora
+
   ora_install::installdb{$file_name:
     version                   => $version,
     file                      => $file_name,
     database_type             => $type,
-    oracle_base               => $oracle_base,
-    oracle_home               => $oracle_home,
-    puppet_download_mnt_point => '/vagrant/software',
+    oracle_base               => $profile::ora::base,
+    oracle_home               => $profile::ora::home,
+    puppet_download_mnt_point => $profile::source_dir,
     remote_file               => false,
   }
 

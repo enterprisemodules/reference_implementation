@@ -6,9 +6,9 @@ class role::wls::wlsonly_master()
   contain profile::wls::software
   contain profile::wls::wlsonly
 
-  Class['profile::base'] ->
-  Class['profile::wls::os'] ->
-  Class['profile::java'] ->
-  Class['profile::wls::software'] ->
-  Class['profile::wls::wlsonly']
+  Class['profile::base']
+  -> Class['profile::wls::os']
+  -> Class['profile::java']
+  -> Class['profile::wls::software']
+  -> Class['profile::wls::wlsonly']
 }

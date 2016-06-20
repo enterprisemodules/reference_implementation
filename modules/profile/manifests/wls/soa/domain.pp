@@ -165,7 +165,7 @@ class profile::wls::soa::domain(
   wls_server{"soa/AdminServer":
     ensure                        => 'present',
     arguments                     => $admin_server_arguments,
-    listenaddress                 => $adminserver_addres,
+    listenaddress                 => $adminserver_address,
     listenport                    => $adminserver_port,
     machine                       => 'LocalMachine',
     logfilename                   => "${wls_log_dir}/AdminServer/AdminServer_${domain_name}.log",
