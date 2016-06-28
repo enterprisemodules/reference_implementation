@@ -4,9 +4,9 @@
 echo 'Installing required gems'
 /opt/puppetlabs/puppet/bin/gem install activesupport librarian-puppet awesome_print --no-rdoc --no-ri
 
-echo 'Installing required puppet modules'
-cd /vagrant
-/opt/puppetlabs/puppet/bin/librarian-puppet install
+# echo 'Installing required puppet modules'
+# cd /vagrant
+# /opt/puppetlabs/puppet/bin/librarian-puppet install
 
 #
 # Setup hiera search and backend. We need this to config our systems
