@@ -16,7 +16,7 @@ class profile::wls::software(
     fmw_infra            => $fmw_infra,
     middleware_home_dir  => $middleware_home_dir,
     oracle_base_home_dir => $oracle_base_home_dir,
-    jdk_home_dir         => '/usr/java/jdk1.7.0_79',
+    jdk_home_dir         => '/usr/java/jdk1.8.0_74',
     os_user              => $os_user,
     os_group             => $os_group,
     download_dir         => '/data/install',

@@ -22,21 +22,21 @@ class profile::wls::os {
       hasstatus => true,
   }
 
-  group { 'weblogic' :
+  group { 'dba' :
     ensure => present,
   }
 
   # http://raftaman.net/?p=1311 for generating password
   # password = weblogic
-  user { 'weblogic' :
+  user { 'oracle' :
     ensure     => present,
-    groups     => 'weblogic',
+    groups     => 'dba',
     shell      => '/bin/bash',
     password   => '$1$mloDctBy$tvcYSIqP4a1yzOVV/JwxY0',
-    home       => "/home/weblogic",
+    home       => "/home/oracle",
     comment    => 'wls user created by Puppet',
     managehome => true,
-    require    => Group['weblogic'],
+    require    => Group['dba'],
   }
 
   $install = [ 'binutils.x86_64','unzip.x86_64']
@@ -49,7 +49,7 @@ class profile::wls::os {
   class { 'limits':
     config => {
                '*'         => {  'nofile'  => { soft => '2048'   , hard => '8192',   },},
-               'weblogic'  => {  'nofile'  => { soft => '65536'  , hard => '65536',  },
+               'oracle'  => {  'nofile'  => { soft => '65536'  , hard => '65536',  },
                                'nproc'   => { soft => '2048'   , hard => '16384',   },
                                'memlock' => { soft => '1048576', hard => '1048576',},
                                'stack'   => { soft => '10240'  ,},},
