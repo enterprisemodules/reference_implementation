@@ -23,7 +23,6 @@ class profile::ora::patches(
 
     $patch_defaults = {
       ensure     => 'present',
-      os_user    => 'oracle',
       ocmrf_file => "${oracle_home}/OPatch/ocm.rsp",
       schedule   => 'maintenance-window',     # Only apply patches in maintenance window
       before     => Db_control["start_${dbname}_after_patching"],
