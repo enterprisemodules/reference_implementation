@@ -26,4 +26,5 @@ wls-acceptance.box
 wls1213.box
 wls1221.box
 modules/em_utils
-modules/nfs
+/modules/nfs
+domain_*.jar
