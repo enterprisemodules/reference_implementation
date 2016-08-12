@@ -2,7 +2,8 @@
 # Install librarian puppet. We need this to download the correct set of puppet modules
 #
 echo 'Installing required gems'
-/opt/puppetlabs/puppet/bin/gem install librarian-puppet awesome_print --no-rdoc --no-ri
+# /opt/puppetlabs/puppet/bin/gem install activesupport --version 4.2.7.1  --no-rdoc --no-ri
+/opt/puppetlabs/puppet/bin/gem install activesupport:4.2.7.1 librarian-puppet awesome_print --no-rdoc --no-ri
 
 echo 'Installing required puppet modules'
 cd /vagrant
@@ -23,7 +24,7 @@ fi
 ln -sf /vagrant/hieradata /etc/puppetlabs/code/environments/production
 
 #
-# Configure the puppet path's 
+# Configure the puppet path's
 #
 echo 'Setting up Puppet module directories'
 dirname=/etc/puppetlabs/code/environments/production/modules
@@ -43,5 +44,3 @@ else
   rm -f $dirname
 fi
 ln -sf /vagrant/manifests /etc/puppetlabs/code/environments/production
-
-
