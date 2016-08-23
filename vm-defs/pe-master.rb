@@ -4,11 +4,11 @@
 alias_name = Pathname.new(__FILE__).basename('.rb').to_s
 ####################
 #
-# Change these settings for your node 
+# Change these settings for your node
 #
 ####################
 settings = {}
-settings[:memory] = 2048
+settings[:memory] = 3072
 settings[:num_cpus] = 1
 settings[:virtualbox] = {}
 settings[:virtualbox][:priv_ipaddress] = '10.10.10.10'
@@ -19,7 +19,8 @@ settings[:virtualbox][:domain_name] = 'example.com'
 #
 # puppet_installer   = "puppet-enterprise-2015.3.0-el-6-x86_64/puppet-enterprise-installer"
 # puppet_installer   = "puppet-enterprise-2015.2.2-el-6-x86_64/puppet-enterprise-installer"
-puppet_installer   = "puppet-enterprise-2016.1.2-el-7-x86_64/puppet-enterprise-installer"
+# puppet_installer   = "puppet-enterprise-2016.1.2-el-7-x86_64/puppet-enterprise-installer"
+puppet_installer   = "puppet-enterprise-2016.2.1-el-7-x86_64/puppet-enterprise-installer"
 
 pe_puppet_user_id  = 495
 pe_puppet_group_id = 496
@@ -48,7 +49,7 @@ config.vm.define alias_name do |machine|
     override.vm.network :private_network, ip: settings[:virtualbox][:priv_ipaddress]
 
     override.vm.synced_folder ".", "/vagrant", :owner => pe_puppet_user_id, :group => pe_puppet_group_id
-    override.vm.provision :shell, :inline => "/vagrant/software/#{puppet_installer} -a /vagrant/answers.lastrun.master.example.com"
+    override.vm.provision :shell, :inline => "/vagrant/software/#{puppet_installer} -c /vagrant/pe.conf -y"
     #
     # For this vagrant setup, we make sure all nodes in the domain examples.com are autosigned. In production
     # you'dd want to explicitly confirm every node.
@@ -69,7 +70,8 @@ config.vm.define alias_name do |machine|
     # Make sure all plugins are synced to the puppetserver before exiting and stating
     # any agents
     #
-    override.vm.provision :shell, :inline => "puppet plugin download > /dev/null"
+    override.vm.provision :shell, :inline => "service pe-puppetserver restart"
+    override.vm.provision :shell, :inline => "puppet agent -t || true"
   end
 
 end
