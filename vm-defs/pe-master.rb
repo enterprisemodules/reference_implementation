@@ -20,7 +20,7 @@ settings[:virtualbox][:domain_name] = 'example.com'
 # puppet_installer   = "puppet-enterprise-2015.3.0-el-6-x86_64/puppet-enterprise-installer"
 # puppet_installer   = "puppet-enterprise-2015.2.2-el-6-x86_64/puppet-enterprise-installer"
 # puppet_installer   = "puppet-enterprise-2016.1.2-el-7-x86_64/puppet-enterprise-installer"
-puppet_installer   = "puppet-enterprise-2016.2.1-el-7-x86_64/puppet-enterprise-installer"
+puppet_installer   = "puppet-enterprise-2016.4.0-el-7-x86_64/puppet-enterprise-installer"
 
 pe_puppet_user_id  = 495
 pe_puppet_group_id = 496
